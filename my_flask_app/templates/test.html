@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Test Sample 1</h1>
+
+        <form action="/submittest", method="post">
+        
+            {% for question in questions_list %}
+                {{question.q_id}}. {{question.question}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option1}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option2}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option3}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option4}} <br> <br>
+                    <br>
+            {% endfor %}
+     
+                <br><br>
+                <input type="submit" name="submitform" value="Submit">
+            </form>
+{% endblock content %}
+
