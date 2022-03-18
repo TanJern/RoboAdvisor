@@ -12,6 +12,7 @@ q2= Question(question="Which of the following statements is false?", option1="A.
 
 q3= Question(question="Which of the following would cause a bank to lose reserves?", option1="A. One of the bank's depositors makes an internet payment to another of its depositors.", option2="B. One of the bank's depositors pays out a cheque to another of its depositors.", option3="C. One of the bank's depositors pays out a cheque to a depositor of another bank.", option4="D. The bank raises the interest rate it pays on deposits.",answer= "C. One of the bank's depositors pays out a cheque to a depositor of another bank.",feedback="Statement C is correct. In this case, the bank must give reserves to the bank of the person who receives the cheque.")
 
+q4= Question(question="Which of thwould cause a bank to lose reserves?", option1="A. One of the bank's deposes an internet payment to another of its depositors.", option2="B. One of the bank'spositors pays out a cheque to another of its depositors." ,answer= "B. One of thenk's depositors pays out a cheque to a depositor of another bank.",feedback="Statement is correct. In this case, the bank must give reserves to the bank of the person who receives the cheque.")
 
 
 
@@ -19,6 +20,7 @@ db.session.add(user1)
 db.session.add(q1)
 db.session.add(q2)
 db.session.add(q3)
+db.session.add(q4)
 
 
 

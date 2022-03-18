@@ -34,10 +34,10 @@ def load_user(user_id):
 
 class Question(db.Model):
     q_id = db.Column(db.Integer, primary_key=True)
-    question= db.Column(db.String(128), unique=False, nullable=False)
+    question= db.Column(db.String(300), unique=False, nullable=False)
     option1 = db.Column(db.String(128), unique=False, nullable=False)
     option2= db.Column(db.String(128), unique=False, nullable=False)
-    option3 = db.Column(db.String(128), unique=False, nullable=False)
-    option4= db.Column(db.String(128), unique=False, nullable=False)
+    option3 = db.Column(db.String(128), unique=False, nullable=True)
+    option4= db.Column(db.String(128), unique=False, nullable=True)
     answer= db.Column(db.String(128), unique=False, nullable=False)
     feedback= db.Column(db.String(300), unique=False, nullable=False)

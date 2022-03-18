@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST" action="">
+         {{ form.csrf_token }}
+        <h4>Edit Question</h4>
+            <h5>Question</h5>
+            <p>{{ form.question }}</p>
+            <h5>Option1</h5>
+            <p>{{ form.option1 }}</p>
+            <h5>Option2</h5>
+            <p>{{ form.option2 }}</p>
+            <h5>Option3</h5>
+            <p>{{ form.option3 }}</p>
+            <h5>Option4</h5>
+            <p>{{ form.option4 }}</p>
+            <h5>Answer</h5>
+            <p>{{ form.answer }}</p>
+            <h5>Feedback</h5>
+            <p>{{ form.feedback }}</p>
+
+            <input type="submit" value="Submit">
+{% endblock content %}

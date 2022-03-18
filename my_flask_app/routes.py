@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, redirect, flash
 from wtforms.widgets.core import html_params
 from my_flask_app import app,db
 from my_flask_app.models import User,Question
-from my_flask_app.forms import LoginForm,TestForm
+from my_flask_app.forms import LoginForm,QuestionForm,EditForm
 from flask_login import login_user, logout_user, current_user, login_required
 
 
@@ -66,40 +66,91 @@ def account():
     
 
 @app.route("/test", methods=['POST','GET'])
+@login_required
 def test():
-
   questions_list=Question.query.order_by(Question.q_id.asc()).all()
-  if current_user.is_authenticated:
-   # if form.validate_on_submit
-   # count=0
-    #question_id = str(Question.q_id)
-    #selected_option = request.form[question_id]
-    #for question in questions_list:
-      #if question.answer == selected_option:
-       # count +=1
-
-    #{% for subfield in form.radio %}
-               # <tr>
-               #     <td>{{ subfield }}{{ subfield.label }}</td> <br>
-             #   </tr>
-           # {% endfor %} -->
     
-    return render_template("test.html",title="Test",questions_list=questions_list)
+  return render_template("test.html",title="Test",questions_list=questions_list)
   
-  else:
-    return redirect(url_for('home'))
+
 
 @app.route("/submittest", methods=['POST','GET'])
+@login_required
 def submittest():
   questions_list=Question.query.order_by(Question.q_id.asc()).all()
+  answered_questions_list=[]
   count=0
   for question in questions_list:
-    question_id=str(question.q_id)
-    selected_option= request.form[question_id]
-    if question.answer == selected_option:
-        count +=1
-    
-    count=str(count)
-  
-  return render_template("submittest.html",title="testresults",questions_list=questions_list,count=count)
+    answered_question= request.form[str(question.q_id)]
+    answered_questions_list.append({"answered_question":answered_question,"question":question})
+    if question.answer == answered_question:
+      count+=1    
+
+  return render_template("submittest.html",title="testresults",questions_list=questions_list,count=count,answered_questions_list=answered_questions_list)
  
+
+@app.route("/managetest", methods=['POST','GET'])
+@login_required
+def managetest():
+  questions_list=Question.query.order_by(Question.q_id.asc()).all()
+    
+  return render_template("managetest.html",title="ManageTest",questions_list=questions_list)
+
+
+@app.route("/newtest", methods=['POST','GET'])
+@login_required
+def newtest():    
+  form=QuestionForm()
+  if form.validate_on_submit():
+    question=Question(question=form.question.data,option1=form.option1.data,option2=form.option2.data,option3=form.option3.data,option4=form.option4.data,answer=form.answer.data,feedback=form.feedback.data)
+    db.session.add(question)
+    db.session.commit()
+    flash('Question has been added!','success')
+    return redirect(url_for('managetest'))
+  return render_template("newtest.html",title="NewTest",form=form)
+
+
+@app.route("/question/<int:q_id>", methods=['POST','GET'])
+@login_required
+def question(q_id):    
+  question=Question.query.get_or_404(q_id)
+  form=EditForm()
+  if form.validate_on_submit():
+    question.question=form.question.data
+    question.option1=form.option1.data
+    question.option2=form.option2.data
+    question.option3=form.option3.data
+    question.option4=form.option4.data
+    question.answer=form.answer.data
+    question.feedback=form.feedback.data
+    db.session.commit()
+    flash('Updated')
+    return redirect(url_for('question',q_id=question.q_id))
+  elif request.method=='GET':
+    form.question.data=question.question
+    form.option1.data=question.option1
+    form.option2.data=question.option2
+    form.option3.data=question.option3
+    form.option4.data=question.option4
+    form.answer.data=question.answer
+    form.feedback.data=question.feedback
+    
+  return render_template("question.html",title="Question",question=question,form=form)
+
+
+@app.route("/delete/<int:q_id>", methods=['POST'])
+@login_required
+def delete(q_id):
+  questions_list=Question.query.order_by(Question.q_id.asc()).all()
+  question=Question.query.get_or_404(q_id)
+
+ 
+  db.session.delete(question)
+  db.session.commit()
+
+  flash('Question has been deleted.')
+
+  return redirect(url_for('managetest'))
+  
+ 
+     

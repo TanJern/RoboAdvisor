@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST" action="">
+        {{ form.csrf_token }}
+            <h3>Create Question</h3>
+                <p>{{ form.question.label }}</p>
+                <p>{{ form.question }}</p>
+                <br>
+                <p>{{ form.option1.label }} {{ form.option1 }}</p>
+                <p>{{ form.option2.label }} {{ form.option2 }}</p>
+                <p>{{ form.option3.label }} {{ form.option3 }}</p>
+                <p>{{ form.option4.label }} {{ form.option4 }}</p>
+                <p>{{ form.answer.label }} {{ form.answer }}</p>
+                <br>
+                <p>{{ form.feedback.label }}</p>
+                <p>{{ form.feedback }}</p>
+                <p><input type="submit" value="Update"></p>
+    </form>
+{% endblock content %}

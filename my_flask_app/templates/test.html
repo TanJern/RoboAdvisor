@@ -7,9 +7,9 @@
             {% for question in questions_list %}
                 {{question.q_id}}. {{question.question}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option1}} <br>
-                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option2}} <br>
-                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option3}} <br>
-                    <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option4}} <br> <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option2}}"> {{question.option2}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option3}}"> {{question.option3}} <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option4}}"> {{question.option4}} <br> <br>
                     <br>
             {% endfor %}
      
