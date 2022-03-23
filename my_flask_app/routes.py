@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, redirect, flash
 from wtforms.widgets.core import html_params
 from my_flask_app import app,db
 from my_flask_app.models import User,Question
-from my_flask_app.forms import LoginForm,QuestionForm,EditForm
+from my_flask_app.forms import LoginForm,QuestionForm,EditForm,FilterForm
 from flask_login import login_user, logout_user, current_user, login_required
 
 
@@ -77,6 +77,7 @@ def test():
 @app.route("/submittest", methods=['POST','GET'])
 @login_required
 def submittest():
+  total_questions=Question.query.order_by(Question.q_id.asc()).count()
   questions_list=Question.query.order_by(Question.q_id.asc()).all()
   answered_questions_list=[]
   count=0
@@ -86,15 +87,30 @@ def submittest():
     if question.answer == answered_question:
       count+=1    
 
-  return render_template("submittest.html",title="testresults",questions_list=questions_list,count=count,answered_questions_list=answered_questions_list)
+  return render_template("submittest.html",title="testresults",questions_list=questions_list,count=count,answered_questions_list=answered_questions_list,total_questions=total_questions)
  
 
 @app.route("/managetest", methods=['POST','GET'])
 @login_required
 def managetest():
-  questions_list=Question.query.order_by(Question.q_id.asc()).all()
-    
-  return render_template("managetest.html",title="ManageTest",questions_list=questions_list)
+  form=FilterForm()
+  level=request.args.get("level")
+
+  if level=="Beginner":
+    query=Question.query.filter_by(level="Beginner")
+
+  elif level=="Intermediate":
+    query=Question.query.filter_by(level="Intermediate")
+
+  elif level=="Advanced":
+    query=Question.query.filter_by(level="Advanced")
+
+  else:
+    query=Question.query.order_by(Question.q_id.asc())
+
+  questions_list=query.all()
+
+  return render_template("managetest.html",title="ManageTest",questions_list=questions_list,form=form)
 
 
 @app.route("/newtest", methods=['POST','GET'])

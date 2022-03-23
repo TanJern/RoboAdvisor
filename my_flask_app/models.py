@@ -41,3 +41,5 @@ class Question(db.Model):
     option4= db.Column(db.String(128), unique=False, nullable=True)
     answer= db.Column(db.String(128), unique=False, nullable=False)
     feedback= db.Column(db.String(300), unique=False, nullable=False)
+    level= db.Column(db.String(20),unique=False, nullable=False)
+    tag= db.Column(db.String(20),unique=False, nullable=False)

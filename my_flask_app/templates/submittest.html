@@ -3,10 +3,10 @@
 
 <form action="/submittest", method="post"></form>
     <h1>Results</h1>
-    <h4>{{count}} questions out of 3</h4>
+    <h4>{{count}} questions out of {{total_questions}}</h4>
     
             {% for question in answered_questions_list %}
-                {{question.question.q_id}}. {{question.question.question}} <br>
+                {{loop.index}}. {{question.question.question}} <br>
                     <name="{{question.question.q_id}}" value="{{question.question.option1}}"> {{question.question.option1}} <br>
                     <name="{{question.question.q_id}}" value="{{question.question.option2}}"> {{question.question.option2}} <br>
                     <name="{{question.question.q_id}}" value="{{question.question.option3}}"> {{question.question.option3}} <br>

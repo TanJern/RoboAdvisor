@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField,SelectField
 from wtforms.validators import DataRequired
 from my_flask_app.models import User,Question
 from flask_login import current_user
@@ -32,3 +32,9 @@ class EditForm(FlaskForm):
   answer = StringField('Answer')
   feedback = TextAreaField('Feedback')
   submit = SubmitField('Submit')
+
+
+class FilterForm(FlaskForm):
+    level=SelectField('Level',choices=[("All","All"),("Beginner","Beginner"),("Intermediate","Intermediate"),("Advanced","Advanced")])
+    tag=SelectField('Tag',choices=[("All","All"),("Macro","Macro"),("Micro","Micro")])
+    submit = SubmitField('Submit')

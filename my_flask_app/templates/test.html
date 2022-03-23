@@ -5,7 +5,7 @@
         <form action="/submittest", method="post">
         
             {% for question in questions_list %}
-                {{question.q_id}}. {{question.question}} <br>
+                {{loop.index}}. {{question.question}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option1}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option2}}"> {{question.option2}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option3}}"> {{question.option3}} <br>
