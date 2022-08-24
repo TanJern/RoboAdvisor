@@ -1,23 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<form action="/submittest", method="post"></form>
-    <h1>Results</h1>
-    <h4>{{count}} questions out of {{total_questions}}</h4>
-    
-            {% for question in answered_questions_list %}
-                {{loop.index}}. {{question.question.question}} <br>
-                    <name="{{question.question.q_id}}" value="{{question.question.option1}}"> {{question.question.option1}} <br>
-                    <name="{{question.question.q_id}}" value="{{question.question.option2}}"> {{question.question.option2}} <br>
-                    <name="{{question.question.q_id}}" value="{{question.question.option3}}"> {{question.question.option3}} <br>
-                    <name="{{question.question.q_id}}" value="{{question.question.option4}}"> {{question.question.option4}} <br><br>
-
-                    Your Answer: {{question.answered_question}} <br>
-                    Correct Answer: {{question.question.answer}} <br>
-                    Feedback: {{question.question.feedback}}
-                    <br> <br> <br>
-            {% endfor %}
+<!--Website design was taken from Bootstrap
+https://getbootstrap.com/-->
 
 
-                <br><br>
+<h1>Recommendations</h1>
+        
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<br>
+<table id="data" class="table table-hover">
+    <thead class="thead-dark">
+        <tr> 
+            <th>Symbol</th>
+            <th>ETF Name</th>
+            <th>Asset Class</th>
+            <th>Total Assets</th>
+            <th>Average Volume</th>
+            <th>ETF Database Category</th>
+
+        </tr>
+    </thead>
+    {% for asset in recommend %}
+    <tbody>
+        <tr> 
+            <td>{{asset[0]}}</td>
+            <td>{{asset[1]}}</td>
+            <td>{{asset[2]}}</td>
+            <td>{{asset[3]}}</td>
+            <td>{{asset[4]}}</td>
+            <td>{{asset[5]}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>   
+<br> 
+<h1>Asset Allocation</h1>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<br>
+<h3>{{result.strategy}} Strategy</h3>
+
+
+<!--Code adapted from this site -->
+<!--https://www.chartjs.org/docs/latest/charts/doughnut.html#pie*/-->
+
+<div class="chart-container" style="position: relative; height:10%; width:45%">
+<canvas id="myChart">
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Bond','Stock','Commodity','Real Estate'],
+        datasets: [ {
+            data: [{{result.bond}}, {{result.stock}}, {{result.commodity}},{{result.real_estate}}],
+            borderWidth: 2,
+            radius: 200,responsive: true,
+            backgroundColor: ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(124,252,0)'],
+        hoverOffset: 30}]
+    }
+    });
+</script>
+</canvas>
+</div>
 {% endblock content %}

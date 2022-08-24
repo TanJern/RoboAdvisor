@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!--code below are adapted from my previous own work:
+https://git.cardiff.ac.uk/c2070756/2070756_cmt120_cw2-->
+
   <h4>Failed to log in. Please try again.</h4>
   <form method="POST" action="">
     {{ form.csrf_token }}
@@ -9,6 +12,6 @@
       <p>{{ form.password.label }} {{ form.password }}</p>
     </div>
     
-    <p>{{form.submit}}</p>
+    <p>{{form.submit(class="btn btn-outline-primary btn-sm")}}</p>
   </form>
 {% endblock content %}

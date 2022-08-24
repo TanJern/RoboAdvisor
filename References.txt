@@ -1,0 +1,20 @@
+References
+Anon., 2022. Bootstrap. [Online] 
+Available at: https://getbootstrap.com
+
+Anon., n.d. Bootstrap. [Online] 
+Available at: https://getbootstrap.com/docs/5.2/examples/dashboard-rtl/
+[Accessed 20 August 2022].	
+
+M, T., 2021. Github. [Online] 
+Available at: https://gist.github.com/Tahsin-Mayeesha/81dcdafc61b774768b64ba5201e31e0a#file-recommending-anime-with-k-nearest-neighbor-ipynb
+[Accessed 10 August 2022].
+
+T, J., 2022. Gitlab. [Online] 
+Available at: https://git.cardiff.ac.uk/c2070756/2070756_cmt120_cw2
+[Accessed 1 August 2022].
+
+T, J., 2022. Gitlab. [Online] 
+Available at: https://git.cardiff.ac.uk/c2070756/aat/-/tree/master/my_flask_app
+[Accessed 2 August 2022].
+

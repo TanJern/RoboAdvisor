@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Recommendations</h1>
+<!--Website design was taken from Bootstrap
+https://getbootstrap.com/-->
+        
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<br>
+<table id="data" class="table table-hover">
+    <thead class="thead-dark">
+        <tr> 
+            <th>Symbol</th>
+            <th>ETF Name</th>
+            <th>Asset Class</th>
+            <th>Total Assets</th>
+            <th>Average Volume</th>
+            <th>ETF Database Category</th>
+
+        </tr>
+    </thead>
+    {% for asset in recommend %}
+    <tbody>
+        <tr> 
+            <td>{{asset[0]}}</td>
+            <td>{{asset[1]}}</td>
+            <td>{{asset[2]}}</td>
+            <td>{{asset[3]}}</td>
+            <td>{{asset[4]}}</td>
+            <td>{{asset[5]}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>   
+
+{% endblock content %}

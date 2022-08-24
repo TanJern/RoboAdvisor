@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
+
+<!--code below are adapted from my previous own work:
+https://git.cardiff.ac.uk/c2070756/2070756_cmt120_cw2-->
+
 <form method="POST" action="">
   {{ form.csrf_token }}
   <p>{{ form.username.label }} {{ form.username }}</p>
   <p>{{ form.password.label }} {{ form.password }}</p>
-  <p><input type="submit" value="Login"></p>
+  <p><button type="submit" class="btn btn-dark" name="submitform" value="Login">Login</button></p>
 </form>
 {% endblock content %}

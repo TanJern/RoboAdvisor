@@ -1,9 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
+<!--Website design was taken from Bootstrap
+https://getbootstrap.com/-->
 
     <h3>Account details</h3>
+    <hr style="height:1px;border: width 100%;color:gray;background-color:gray">
     <p>First Name: {{current_user.firstname}}</p>
     <p>Username: {{current_user.username }}</p>
+    
 
+
+    <br><br>
+    <h3>Bookmarks</h3>
+    <hr style="height:1px;border: width 100%;color:gray;background-color:gray">
+    <form method="GET" action="">
+        {{ form.csrf_token }}
+         
+            {{form.asset_class(class="form-select form-select-sm")}}
+            <br>
+            {{form.submit(class="btn btn-outline-primary btn-sm")}}
+    </form>
+    <table id="data" class="table table-hover">
+        <thead class="thead-dark">
+             <tr>   
+                 <th></th>
+                 <th>Symbol</th>
+                 <th>ETF Name</th>
+                 <th>Asset Class</th>
+                 <th>Total Assets</th>
+                 <th>Average Volume</th>
+                 <th>ETF Database Category</th>
+                 <th>Liquidity Rating</th>
+                 <th>Expenses Rating</th>
+                 <th>Volatility Rating</th>
+                 <th>Dividend Rating</th>
+             </tr>
+         </thead> 
+         <form action="/personal_recommend", method="post">
+         <tbody>
+             {% for asset in user_assets %}
+                 <tr>
+                     <td><input type="radio" name="radio" value="{{asset.etf_name}}" ></td> 
+                     <td>{{asset.symbol}}</td>
+                     <td>{{asset.etf_name}}</td>
+                     <td>{{asset.asset_class}}</td>
+                     <td>{{asset.total_assets}}</td>
+                     <td>{{asset.avg_volume}}</td>
+                     <td>{{asset.etf_database_category}}</td>
+                     <td>{{asset.liquidity_rating}}</td>
+                     <td>{{asset.expenses_rating}}</td>
+                     <td>{{asset.volatility_rating}}</td>
+                     <td>{{asset.dividend_rating}}</td>
+                 </tr>
+         </tbody>
+         {% endfor %}
+         <br>
+         <button type="submit" class="btn btn-dark" name="submitform" value="Submit">Submit</button>
+         </form>
+     </table>
 
 {% endblock content %}

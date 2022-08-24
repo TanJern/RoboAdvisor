@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<!--Website design was taken from Bootstrap
+https://getbootstrap.com/-->
+    <h1>Bond ETFs</h1>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    
+    <form method="GET" action="">
+        {{ form.csrf_token }}
+            <br>
+            {{form.bond_class(class="form-select form-select-sm")}}
+            <br>
+            {{form.submit(class="btn btn-outline-primary btn-sm")}}
+    </form>
+    <br>
+        <table id="data" class="table table-hover">
+           <thead class="thead-dark">
+                <tr> 
+                    <th></th>   
+                    <th>Symbol</th>
+                    <th>ETF Name</th>
+                    <th>Asset Class</th>
+                    <th>Total Assets</th>
+                    <th>Average Volume</th>
+                    <th>ETF Database Category</th>
+                    <th>Liquidity Rating</th>
+                    <th>Expenses Rating</th>
+                    <th>Volatility Rating</th>
+                    <th>Dividend Rating</th>
+                </tr>
+            </thead> 
+            <form action="", method="post">
+            <tbody>
+                {% for asset in assets_list %}
+                    <tr>
+                        <td><input type="checkbox" name="checkbox" value={{asset.a_id}}  ></td> 
+                        <td>{{asset.symbol}}</td>
+                        <td>{{asset.etf_name}}</td>
+                        <td>{{asset.asset_class}}</td>
+                        <td>{{asset.total_assets}}</td>
+                        <td>{{asset.avg_volume}}</td>
+                        <td>{{asset.etf_database_category}}</td>
+                        <td>{{asset.liquidity_rating}}</td>
+                        <td>{{asset.expenses_rating}}</td>
+                        <td>{{asset.volatility_rating}}</td>
+                        <td>{{asset.dividend_rating}}</td>
+                    </tr>
+            </tbody>
+        
+            {% endfor %}
+            <button type="submit" class="btn btn-dark" name="submitform" value="Bookmark">Bookmark</button>
+        </table>
+    </form>
+{% endblock content %}

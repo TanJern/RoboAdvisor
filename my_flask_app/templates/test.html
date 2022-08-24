@@ -1,20 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Test Sample 1</h1>
+<!--Website design was taken from Bootstrap
+https://getbootstrap.com/-->
+    <h1>Survey for Investor Profile</h1>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
         <form action="/submittest", method="post">
         
             {% for question in questions_list %}
-                {{loop.index}}. {{question.question}} <br>
+                {{question.q_id}}. {{question.question}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option1}}"> {{question.option1}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option2}}"> {{question.option2}} <br>
                     <input type="radio" name="{{question.q_id}}" value="{{question.option3}}"> {{question.option3}} <br>
-                    <input type="radio" name="{{question.q_id}}" value="{{question.option4}}"> {{question.option4}} <br> <br>
-                    <br>
+                    <input type="radio" name="{{question.q_id}}" value="{{question.option4}}"> {{question.option4}} <br><br> 
             {% endfor %}
-     
+            
+            {% for asset in assets_list %}
+                {{asset.a_id}} {{asset.symbol}}{{asset.etf_name}}{{asset.asset_class}}{{asset.total_assets}}{{asset.avg_volume}} <br>
+                <br>
+            {% endfor %}
                 <br><br>
-                <input type="submit" name="submitform" value="Submit">
+                <button type="submit" class="btn btn-dark" name="submitform" value="Submit">Submit</button>
             </form>
+
+            
 {% endblock content %}
 
